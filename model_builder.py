@@ -1,6 +1,3 @@
-# model_builder.py
-
-# Import necessary libraries
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
@@ -18,7 +15,7 @@ def create_model(sequence_length, num_features):
     model.add(Dense(25))
     # The output layer with a single unit for the prediction
     model.add(Dense(1))
-    
+
     # Compile the model for training
     model.compile(optimizer='adam', loss='mean_squared_error')
     return model

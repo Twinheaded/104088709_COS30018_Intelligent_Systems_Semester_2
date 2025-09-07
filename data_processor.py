@@ -1,6 +1,3 @@
-# data_processor.py
-
-# Import necessary libraries
 import os
 import numpy as np
 import pandas as pd
@@ -23,14 +20,14 @@ def load_and_process_data(
 
     # Define the folder name for our data cache
     cache_folder = "data_cache"
-    
+
     # Create the folder if it doesn't already exist
     if not os.path.exists(cache_folder):
         os.makedirs(cache_folder)
 
     # Create a unique filename and join it with the folder path
     filename = os.path.join(cache_folder, f"{ticker}_{start_date}_{end_date}.csv")
-    
+
     # Check if data is cached locally
     if os.path.exists(filename):
         print(f"Loading data from local file: {filename}")
@@ -39,11 +36,11 @@ def load_and_process_data(
         # Download data if not cached
         print(f"Downloading data for {ticker}...")
         df = yf.download(ticker, start=start_date, end=end_date, progress=False)
-        
+
         if isinstance(df.columns, pd.MultiIndex):
             # If columns are multi-level (e.g., [('Close', 'CBA.AX')]), flatten them.
             df.columns = df.columns.get_level_values(0)
-        
+
         df.to_csv(filename, index_label='Date')
 
     # Prepare result dictionary and handle missing values
@@ -89,5 +86,5 @@ def load_and_process_data(
         result["X_train"], result["X_test"], result["y_train"], result["y_test"] = train_test_split(
             X, y, test_size=test_size, shuffle=shuffle
         )
-    
+
     return result

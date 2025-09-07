@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 # Import our custom functions from the other files
 from data_processor import load_and_process_data
 from model_builder import create_model
+from visualizer import plot_candlestick_chart
 
 # This block ensures the code runs only when the script is executed directly
 if __name__ == "__main__":
@@ -50,3 +51,10 @@ if __name__ == "__main__":
     plt.plot(valid_data[['Close', 'Predictions']])
     plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
     plt.show()
+    
+    # We use the original, unscaled dataframe for this visualization
+    # This shows the daily candlestick chart (n_days=1)
+    plot_candlestick_chart(original_df, TICKER, n_days=1)
+    
+    # This shows a resampled weekly candlestick chart (n_days=5 trading days)
+    plot_candlestick_chart(original_df, TICKER, n_days=5)
