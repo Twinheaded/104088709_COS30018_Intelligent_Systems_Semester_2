@@ -3,7 +3,7 @@ from tensorflow.keras.layers import LSTM
 from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard
 import os
 import pandas as pd
-from parameters import *
+from P1.parameters import *
 
 
 # create these folders if they does not exist

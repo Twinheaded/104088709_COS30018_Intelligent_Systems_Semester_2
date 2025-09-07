@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os  # ADD THIS LINE - it was missing!
 
 from stock_prediction import create_model, load_data
-from parameters import *
+from P1.parameters import *
 
 
 def plot_graph(test_df):
