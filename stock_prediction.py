@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 # Import our custom functions from the other files
 from data_processor import load_and_process_data
 from model_builder import create_model
-from visualizer import plot_candlestick_chart
+from model_builder import create_dl_model
+
 
 # This block ensures the code runs only when the script is executed directly
 if __name__ == "__main__":
@@ -20,8 +21,19 @@ if __name__ == "__main__":
     data = load_and_process_data(TICKER, START_DATE, END_DATE, n_steps=N_STEPS)
 
     # -- 3. Create and Train the Model --
-    # Call the function from model_builder.py
-    model = create_model(N_STEPS, data["X_train"].shape[2])
+    
+    n_features = data["X_train"].shape[2]
+    
+    # Example: Create an LSTM model
+    model = create_dl_model(n_layers=2, layer_size=128, layer_type='LSTM', input_shape=(data["X_train"].shape[1], n_features))
+
+    # # Example: Create a GRU model
+    # model = create_dl_model(n_layers=3, layer_size=256, layer_type='GRU', input_shape=(50, 1))
+    
+    # # Call the function from model_builder.py
+    # model = create_model(N_STEPS, data["X_train"].shape[2])
+    
+
     
     # Train the model
     model.fit(data["X_train"], data["y_train"],
@@ -51,10 +63,3 @@ if __name__ == "__main__":
     plt.plot(valid_data[['Close', 'Predictions']])
     plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
     plt.show()
-    
-    # We use the original, unscaled dataframe for this visualization
-    # This shows the daily candlestick chart (n_days=1)
-    plot_candlestick_chart(original_df, TICKER, n_days=1)
-    
-    # This shows a resampled weekly candlestick chart (n_days=5 trading days)
-    plot_candlestick_chart(original_df, TICKER, n_days=5)

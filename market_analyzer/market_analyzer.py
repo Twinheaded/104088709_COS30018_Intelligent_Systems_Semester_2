@@ -2,7 +2,7 @@ import pandas as pd
 
 # Import our custom functions
 from data_processor import load_and_process_data
-from visualizer import plot_candlestick_chart, plot_price_distribution_boxplot
+from market_analyzer.visualizer import plot_candlestick_chart, plot_price_distribution_boxplot
 
 # This block ensures the code runs only when the script is executed directly
 if __name__ == "__main__":
@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # -- 1. Define Parameters for Analysis --
     TICKER = "CBA.AX"
     START_DATE = "2022-01-01"
-    END_DATE = "2024-12-31"
+    END_DATE = "2023-12-31"
 
     # -- 2. Load the Data --
     # We only need the original DataFrame, so we can ignore the processed data for now.
